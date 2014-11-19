@@ -5,6 +5,7 @@ describe Category do
   it { should have_many(:videos) }
 
   describe "#recent_videos" do
+
     it "should display up to 6 videos by created_at DESC" do
       c = Category.create(name: "Comedy")
       v1 = Video.create(title: "Monk", description: "Monk movie 1", category: c)
@@ -15,10 +16,6 @@ describe Category do
       v6 = Video.create(title: "Monk", description: "Monk movie 6", category: c)
       v7 = Video.create(title: "Monk", description: "Monk movie 7", category: c)
       expect(c.recent_videos).to eq([v7, v6, v5, v4, v3, v2])
-    end
-
-    it "should return an empty array if category has no videos" do
-      
     end
 
   end
