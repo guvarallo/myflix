@@ -1,0 +1,4 @@
+- @results.each do |result|
+  .video.col-sm-2
+    = link_to video_path(result) do
+      %img(src="#{result.small_cover_url}")
