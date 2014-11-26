@@ -7,8 +7,8 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 Video.create(title: "Monk", description: "Monk movie", large_cover_url: "/tmp/monk_large.jpg", small_cover_url: "/tmp/monk.jpg")
-Video.create(title: "Family Guy", description: "Family guy moive", small_cover_url: "/tmp/family_guy.jpg")
-Video.create(title: "Futurama", description: "Futurama movie", small_cover_url: "/tmp/futurama.jpg")
+Video.create(title: "Family Guy", description: "Family guy moive", large_cover_url: "/tmp/family_guy.jpg", small_cover_url: "/tmp/family_guy.jpg")
+Video.create(title: "Futurama", description: "Futurama movie", large_cover_url: "/tmp/futurama.jpg", small_cover_url: "/tmp/futurama.jpg")
 Category.create(name: "Comedy")
 Category.create(name: "Drama")
 Category.create(name: "Suspense")
