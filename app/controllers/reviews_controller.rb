@@ -2,17 +2,18 @@ class ReviewsController < ApplicationController
   before_action :require_user
 
   def create
-    @video = Video.find_by(params[:video_id])
-    @review = @video.reviews.create(params.require(:review).permit(:body, :rating))
-    @review.user = current_user
+    @video = Video.find(params[:video_id])
+    @review = @video.reviews.build(review_params.merge!(user: current_user))
 
     if @review.save
-      flash[:notice] = "Review successfully created!"
-      redirect_to video_path(@video)
+      redirect_to video_path(@video)      
     else
-      @video.reload
       render 'videos/show'
     end
   end
-  
+
+  def review_params
+    params.require(:review).permit(:body, :rating)
+  end
+
 end

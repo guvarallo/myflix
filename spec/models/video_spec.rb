@@ -3,6 +3,7 @@ require 'spec_helper'
 describe Video do
 
   it { should belong_to(:category) }
+  it { should have_many(:reviews).order("created_at DESC") }
   it { should validate_presence_of(:title) }
   it { should validate_presence_of(:description) }
 
@@ -37,6 +38,19 @@ describe Video do
       expect(Video.search_by_title("")).to eq([])
     end
 
+  end
+
+  describe 'reviews' do
+
+    it "should display reviews by created_at DESC" do
+      v = Fabricate(:video, id: 1)
+      u = Fabricate(:user, id: 1)
+      r1 = Fabricate(:review)
+      r2 = Fabricate(:review)
+      r3 = Fabricate(:review)
+      expect(v.reviews).to eq([r3, r2, r1])
+    end
+    
   end
 
 end
