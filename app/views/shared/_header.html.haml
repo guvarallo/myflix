@@ -7,7 +7,7 @@
   %ul.col-md-4.clearfix
     - if signed_in?
       %li= link_to "Videos", home_path
-      %li= link_to "My Queue"
+      %li= link_to "My Queue", queue_path
       %li= link_to "People"
   - if signed_in?
     = form_tag search_videos_path, class: "col-md-5 navbar-form", method: "get" do
