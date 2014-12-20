@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe QueueItemsController do
-  
+
   describe 'GET index' do
-    
+
     it "sets @queue_items to the queue items of the logged in user" do
       user = Fabricate(:user)
       session[:user_id] = user.id
@@ -85,10 +85,18 @@ describe QueueItemsController do
       expect(response).to redirect_to queue_path
     end
 
+    it "does not delete queue_item if current_user not the owner" do
+      session[:user_id] = Fabricate(:user).id
+      queue_item = Fabricate(:queue_item, user: gus)
+      delete :destroy, id: queue_item.id
+      expect(QueueItem.count).to eq(1)
+    end
+
     it "redirects to root_path if unauthenticated user" do
       queue_item = Fabricate(:queue_item, user: gus)
       delete :destroy, id: queue_item.id
       expect(response).to redirect_to root_path
     end
   end
+
 end
