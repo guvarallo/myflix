@@ -12,6 +12,16 @@ class QueueItemsController < ApplicationController
     redirect_to queue_path
   end
 
+  def destroy
+    queue_item = QueueItem.find(params[:id])
+
+    if queue_item.destroy
+      redirect_to queue_path
+    else
+      redirect_to root_path
+    end
+  end
+
   private
 
   def item_position
@@ -19,7 +29,7 @@ class QueueItemsController < ApplicationController
   end
 
   def video_in_queue?(video)
-    current_user.queue_items.map(&:video).include?(video)
+    current_user.reload.queue_items.map(&:video).include?(video)
   end
 
 end

@@ -12,7 +12,7 @@ Myflix::Application.routes.draw do
 
   resources :users,       only: [:create]
   resources :categories,  only: [:show]
-  resources :queue_items, only: [:create]
+  resources :queue_items, only: [:create, :destroy]
 
   resources :videos, only: [:show] do
     collection do
