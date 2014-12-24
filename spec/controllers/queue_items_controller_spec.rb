@@ -22,8 +22,8 @@ describe QueueItemsController do
 
   describe 'POST create' do
     context "authenticated users" do
-      let!(:gus) { Fabricate(:user) }
-      let!(:vid) { Fabricate(:video) }
+      let(:gus) { Fabricate(:user) }
+      let(:vid) { Fabricate(:video) }
       before do
         session[:user_id] = gus.id
         post :create, video_id: vid.id
@@ -66,6 +66,39 @@ describe QueueItemsController do
         expect(response).to redirect_to root_path
       end
     end
+  end
+
+  describe 'POST update_queue' do
+    context "with valid inputs" do 
+      let!(:user) { Fabricate(:user) }
+      let!(:queue_item1) { Fabricate(:queue_item, user: user, position: 1) }
+      let!(:queue_item2) { Fabricate(:queue_item, user: user, position: 2) }
+
+      it "redirects to queue_path" do
+        session[:user_id] = user.id
+        post :update_queue, queue_items: [{id: queue_item1.id, position: 2}, 
+                                          {id: queue_item2.id, position: 1}]
+        expect(response).to redirect_to queue_path
+      end
+
+      it "reorders the queue_item according to the number given" do
+        session[:user_id] = user.id
+        post :update_queue, queue_items: [{id: queue_item1.id, position: 2}, 
+                                         {id: queue_item2.id, position: 1}]
+        expect(user.queue_items).to eq([queue_item2, queue_item1])
+      end
+
+      it "reorders other queue_items when one item is changed" do
+        session[:user_id] = user.id
+        post :update_queue, queue_items: [{id: queue_item1.id, position: 3}, 
+                                         {id: queue_item2.id, position: 2}]
+        expect(user.queue_items.map(&:position)).to eq([1, 2])
+      end
+    end
+
+    context "with invalid inputs"
+    context "with unauthenticated users"
+    context "with queue items that do not belong to current user"
   end
 
   describe 'DELETE destroy' do

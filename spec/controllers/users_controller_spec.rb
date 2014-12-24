@@ -12,9 +12,7 @@ describe UsersController do
   end
 
   describe 'POST create' do
-
     context "with valid input" do
-
       before { post :create, user: Fabricate.attributes_for(:user) }
 
       it "should create the user" do
@@ -27,13 +25,12 @@ describe UsersController do
     end
 
     context "with invalid input" do
-
       before { post :create, user: { email: "abc@abc.com", password: "abc" } }
 
       it "should not create the user" do
         expect(User.count).to eq(0)
       end
-
+!
       it "should render the :new template" do
         should render_template(:new)
       end
@@ -43,7 +40,6 @@ describe UsersController do
       end
 
     end
- 
   end
   
 end
