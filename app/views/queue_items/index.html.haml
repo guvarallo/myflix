@@ -23,7 +23,8 @@
                     = link_to queue_item.video.title, queue_item.video
                   %td
                     = button_to "Play", nil, class: "btn btn-default"
-                  %td= queue_item.rating.present? ? "#{queue_item.rating} / 5" : "No ratings yet"
+                  %td
+                    = select_tag "queue_items[][rating]", queue_items_rating_options(queue_item.rating), include_blank: true
                   %td
                     = link_to queue_item.video.category.name, queue_item.video.category
                   %td
