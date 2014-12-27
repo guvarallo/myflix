@@ -6,7 +6,7 @@ class ReviewsController < ApplicationController
     @review = @video.reviews.build(review_params.merge!(user: current_user))
 
     if @review.save
-      redirect_to video_path(@video)      
+      redirect_to video_path(@video)
     else
       render 'videos/show'
     end
