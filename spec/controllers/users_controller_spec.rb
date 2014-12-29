@@ -8,7 +8,7 @@ describe UsersController do
       get :new
       expect(assigns(:user)).to be_instance_of(User)
     end
-    
+
   end
 
   describe 'POST create' do
@@ -36,10 +36,9 @@ describe UsersController do
       end
 
       it "should set @user" do
-        expect(assigns(:user)).to be_instance_of(User)        
+        expect(assigns(:user)).to be_instance_of(User)
       end
 
     end
   end
-  
 end
