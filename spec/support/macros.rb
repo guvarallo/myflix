@@ -9,3 +9,11 @@ end
 def clear_current_user
   session[:user_id] = nil
 end
+
+def sign_in(user1=nil)
+  user = user1 || Fabricate(:user)
+  visit sign_in_path
+  fill_in 'Email', :with => user.email
+  fill_in 'Password', :with => user.password
+  click_button 'Sign in'
+end

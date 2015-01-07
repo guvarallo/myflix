@@ -23,11 +23,13 @@ group :development, :test do
   gem 'rspec-rails', '2.99'
   gem 'fabrication'
   gem 'faker'
+  gem 'launchy'
 end
 
 group :test do
   gem 'database_cleaner', '1.2.0'
   gem 'shoulda-matchers'
+  gem 'capybara'
 end
 
 group :production do
