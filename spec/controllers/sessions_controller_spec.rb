@@ -3,7 +3,6 @@ require 'spec_helper'
 describe SessionsController do
 
   describe 'GET new' do
-
     it "should render the new template if unauthenticated user" do
       get :new
       expect(response).to render_template :new
@@ -17,9 +16,7 @@ describe SessionsController do
   end
 
   describe 'POST create' do
-
     context "valid username and password" do
-
       before do
         @user = Fabricate(:user)
         post :create, email: @user.email, password: @user.password
@@ -37,9 +34,8 @@ describe SessionsController do
         expect(response).to redirect_to home_path
       end
     end
-    
-    context "invalid username and password" do
 
+    context "invalid username and password" do
       before do
         Fabricate(:user)
         post :create, email: "some@email.com", password: "somepass"
@@ -61,7 +57,6 @@ describe SessionsController do
   end
 
   describe 'GET destroy' do
-
     before do
       session[:user_id] = Fabricate(:user).id
       get :destroy
@@ -78,8 +73,7 @@ describe SessionsController do
     it "should redirect_to root_path" do
       expect(response).to redirect_to root_path
     end
-
   end
-  
+
 end
 
