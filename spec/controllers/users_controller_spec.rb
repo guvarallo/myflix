@@ -30,7 +30,7 @@ describe UsersController do
       it "should not create the user" do
         expect(User.count).to eq(0)
       end
-!
+
       it "should render the :new template" do
         should render_template(:new)
       end
@@ -41,4 +41,11 @@ describe UsersController do
 
     end
   end
+
+  describe 'GET show' do
+    let(:gus) { Fabricate(:user) }
+    before { get :show, id: gus.id }
+    it { expect(assigns :user).to eq(gus) }
+  end
+
 end
