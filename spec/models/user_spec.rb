@@ -4,6 +4,8 @@ describe User do
 
   it { should have_many(:reviews).order("created_at DESC") }
   it { should have_many(:queue_items) }
+  it { should have_many(:relations).through(:relationships) }
+  it { should have_many(:followers).through(:inverse_relationships) }
   it { should validate_presence_of(:name) }
   it { should validate_presence_of(:email) }
   it { should validate_presence_of(:password) }
