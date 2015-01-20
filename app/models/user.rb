@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 
-  has_many :reviews
+  has_many :reviews, -> { order("created_at DESC") }
   has_many :queue_items
 
   validates_presence_of :name, :email, :password
