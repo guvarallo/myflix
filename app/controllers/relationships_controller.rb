@@ -6,8 +6,9 @@ class RelationshipsController < ApplicationController
   end
 
   def create
-    current_user.relationships.create(relation_id: params[:relation_id])
-    flash[:success] = "You are now following the user!"
+    user = User.find(params[:relation_id])
+    Relationship.create(user: current_user, relation_id: params[:relation_id]) if 
+                        current_user.can_follow?(user)
     redirect_to people_path
   end
 
@@ -15,4 +16,5 @@ class RelationshipsController < ApplicationController
     current_user.relationships.destroy(params[:id])
     redirect_to people_path
   end
+
 end

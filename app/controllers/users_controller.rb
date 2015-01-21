@@ -21,10 +21,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def people
-
-  end
-
   private
 
   def user_params

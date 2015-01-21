@@ -10,20 +10,25 @@ describe RelationshipsController do
       post :create, relation_id: bob.id
       expect(gus.relations.first).to eq(bob)
     end
-    it "sets the flash" do
-      post :create, relation_id: bob.id
-      should set_the_flash
-    end
     it "redirects to people_path" do
-      post :create, relation_id: bob.id
+      post :create, relation_id: bob.id 
       expect(response).to redirect_to people_path
     end
     it "does not create a relation for another user" do
-      post :create, user_id: bob.id, relation_id: gus.id
+      post :create, user: bob, relation_id: gus.id
       expect(bob.relations.count).to eq(0)
     end
+    it "does not follow the same person twice" do
+      Relationship.create(user: gus, relation_id: bob.id)
+      post :create, relation_id: bob.id
+      expect(gus.relations.count).to eq(1)
+    end
+    it "does not follow oneself" do
+      post :create, relation_id: gus.id
+      expect(gus.relations.count).to eq(0)
+    end
     it_behaves_like "require_sign_in" do
-      let(:action) { post :create, user_id: gus.id, relation_id: bob.id }
+      let(:action) { post :create, user: gus, relation_id: bob.id }
     end
   end
 
