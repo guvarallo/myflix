@@ -1,6 +1,10 @@
 class RelationshipsController < ApplicationController
   before_action :require_user
 
+  def index
+
+  end
+
   def create
     current_user.relationships.create(relation_id: params[:relation_id])
     flash[:success] = "You are now following the user!"
