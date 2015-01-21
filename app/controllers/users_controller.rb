@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :require_user, only: [:show, :people]
 
   def new
     @user = User.new
@@ -8,11 +9,16 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      flash[:success] = "User successfully created!"
+      flash[:success] = "Welcome to MyFlix #{@user.name}!"
+      session[:user_id] = @user.id
       redirect_to home_path
     else
       render :new
     end
+  end
+
+  def show
+    @user = User.find(params[:id])
   end
 
   private

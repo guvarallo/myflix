@@ -8,7 +8,7 @@
     - if signed_in?
       %li= link_to "Videos", home_path
       %li= link_to "My Queue", queue_path
-      %li= link_to "People"
+      %li= link_to "People", people_path
   - if signed_in?
     = form_tag search_videos_path, class: "col-md-5 navbar-form", method: "get" do
       = text_field_tag :search_term, params[:search_term], class: "form-control", placeholder: "Search for videos here"

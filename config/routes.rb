@@ -10,10 +10,12 @@ Myflix::Application.routes.draw do
   get  '/home',         to: 'videos#index'
   get  '/queue',        to: 'queue_items#index'
   post '/update_queue', to: 'queue_items#update_queue'
+  get  '/people',       to: 'relationships#index'
 
-  resources :users,       only: [:create]
-  resources :categories,  only: [:show]
-  resources :queue_items, only: [:create, :destroy]
+  resources :users,         only: [:create, :show]
+  resources :categories,    only: [:show]
+  resources :queue_items,   only: [:create, :destroy]
+  resources :relationships, only: [:create, :destroy]
 
   resources :videos, only: [:show] do
     collection do
