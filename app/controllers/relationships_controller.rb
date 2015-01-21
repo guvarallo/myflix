@@ -1,15 +1,14 @@
 class RelationshipsController < ApplicationController
+  before_action :require_user
 
   def create
-    relationship = current_user.relationships.build(relation_id: params[:relation_id])
-    if relationship.save
-      redirect_to people_path
-    else
-      redirect_to root_path
-    end
+    current_user.relationships.create(relation_id: params[:relation_id])
+    flash[:success] = "You are now following the user!"
+    redirect_to people_path
   end
 
   def destroy
-
+    current_user.relationships.destroy(params[:id])
+    redirect_to people_path
   end
 end

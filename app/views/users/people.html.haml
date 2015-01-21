@@ -9,13 +9,13 @@
         %th(width="20%") Followers
         %th(width="30%") Unfollow
     %tbody
-      - current_user.relations.each do |rel|
+      - current_user.relationships.each do |rel|
         %tr
           %td
             %img(src="http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest('#{rel.email}'.downcase)}?s=40")
-            = link_to rel.name, user_path(rel)
-          %td.extra-padding #{rel.queue_items.count}
-          %td.extra-padding #{current_user.inverse_relationships.count}
+            = link_to rel.relation.name, user_path(rel.relation)
+          %td.extra-padding #{rel.relation.queue_items.count}
+          %td.extra-padding #{rel.relation.inverse_relationships.count}
           %td.extra-padding
-            = link_to "", method: :post do
+            = link_to relationship_path(rel), method: :delete do
               %i.glyphicon.glyphicon-remove
