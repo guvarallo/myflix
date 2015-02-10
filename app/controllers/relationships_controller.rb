@@ -1,9 +1,7 @@
 class RelationshipsController < ApplicationController
   before_action :require_user
 
-  def index
-
-  end
+  def index; end
 
   def create
     user = User.find(params[:relation_id])
