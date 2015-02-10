@@ -13,3 +13,12 @@ test:
   pool: 5
   username: gustavo
   password: 
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: myflix_production
+  pool: 5
+  username: gustavo
+  password: 
+
