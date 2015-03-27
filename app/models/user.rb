@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
 
   has_secure_password validations: false
 
+  before_create :generate_token
+
   def positions_reorder
     queue_items.each_with_index do |item, index|
       item.update_attributes(position: index + 1)
@@ -28,6 +30,10 @@ class User < ActiveRecord::Base
 
   def can_follow?(user)
     !(self.following_user?(user) || self == user)
+  end
+
+  def generate_token
+    self.token = SecureRandom.urlsafe_base64
   end
 
 end
